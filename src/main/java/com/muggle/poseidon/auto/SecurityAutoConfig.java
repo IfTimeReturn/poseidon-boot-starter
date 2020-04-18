@@ -4,8 +4,11 @@ import com.muggle.poseidon.adapter.PoseidonAuthConfigAdapter;
 import com.muggle.poseidon.aop.RequestAspect;
 import com.muggle.poseidon.base.DistributedLocker;
 import com.muggle.poseidon.base.exception.SimplePoseidonException;
+import com.muggle.poseidon.entity.AuthUrlPathDO;
 import com.muggle.poseidon.service.TokenService;
 import com.muggle.poseidon.store.SecurityStore;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.reactive.result.condition.PatternsRequestCondition;
+import org.springframework.web.reactive.result.condition.RequestMethodsRequestCondition;
+import org.springframework.web.reactive.result.method.RequestMappingInfo;
+import org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.util.pattern.PathPattern;
+
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @program: poseidon-cloud-starter
@@ -39,8 +56,8 @@ public class SecurityAutoConfig {
     @Autowired
     PoseidonSecurityProperties properties;
 
-//    @Autowired
-//    private WebApplicationContext applicationContext;
+    @Autowired
+    private WebApplicationContext applicationContext;
 
     @Bean
     public PoseidonAuthConfigAdapter getAdapter(TokenService tokenService, SecurityStore securityStore){
@@ -62,14 +79,14 @@ public class SecurityAutoConfig {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
-               /* log.debug("》》》》 权限系统开机任务执行");
+                log.debug("》》》》 权限系统开机任务执行");
                 List<AuthUrlPathDO> allURL = getAllURL();
-                tokenService.saveUrlInfo(allURL);*/
+                tokenService.saveUrlInfo(allURL);
             }
         };
     }
 
-    /** 读取所有的url 并交给tokenService.saveUrlInfo处理 **//*
+    /** 读取所有的url 并交给tokenService.saveUrlInfo处理 **/
     public  List<AuthUrlPathDO> getAllURL() {
         List<AuthUrlPathDO> resultList = new ArrayList<>();
 
@@ -113,9 +130,9 @@ public class SecurityAutoConfig {
                 }
             }
             PatternsRequestCondition p = requestMappingInfo.getPatternsCondition();
-            for (String url : p.getPatterns()) {
+            for (PathPattern url : p.getPatterns()) {
                 //请求URL
-                authUrlPathDO.setMethodURL(url);
+                authUrlPathDO.setMethodURL( url.toString());
             }
             RequestMethodsRequestCondition methodsCondition = requestMappingInfo.getMethodsCondition();
             for (RequestMethod requestMethod : methodsCondition.getMethods()) {
@@ -125,7 +142,7 @@ public class SecurityAutoConfig {
             resultList.add(authUrlPathDO);
         }
         return resultList;
-    }*/
+    }
 
     @Bean
     @Autowired
