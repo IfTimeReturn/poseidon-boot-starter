@@ -17,6 +17,6 @@ public class RoolMessageHandler {
 
     private RequestMappingHandlerMapping handlerMapping;
 
-
+'https://github.com/muggle0/poseidon-boot-starter.git/': SSL certificate problem: unable to get local issuer certificate
 }
 */
