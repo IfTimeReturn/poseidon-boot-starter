@@ -10,13 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -76,19 +74,6 @@ public class WebResultHandler {
         return error;
     }
 
-    /**
-     * 请求路径不存在
-     *
-     * @param e
-     * @param req
-     * @return
-     */
-    @ExceptionHandler(value = {NoHandlerFoundException.class})
-    public ResultBean notFoundUrl(Exception e, HttpServletRequest req) {
-        log.error("请求路径不存在",e);
-        ResultBean error = ResultBean.error("请求路径不存在");
-        return error;
-    }
 
 
     /**

@@ -1,3 +1,4 @@
+/*
 package com.muggle.poseidon.aop;
 
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -8,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
 
+*/
 /**
  * @program: hiram_erp
  * @description: 黑名单拦截器
  * @author: muggle
  * @create: 2018-12-06 11:02
- **/
+ **//*
+
 @Deprecated
 public  class RequestLockInterceptor implements HandlerInterceptor {
 
@@ -46,3 +49,4 @@ public  class RequestLockInterceptor implements HandlerInterceptor {
     }
 
 }
+*/
