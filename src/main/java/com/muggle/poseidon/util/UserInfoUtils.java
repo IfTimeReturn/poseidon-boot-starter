@@ -15,14 +15,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserInfoUtils {
 
-    public static UserDetails getUserInfo() throws BasePoseidonCheckException {
+    public static UserDetails getUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication==null||authentication.getDetails()==null){
            return null;
         }
-        if (!(authentication instanceof UserDetails )){
-            throw new SimplePoseidonCheckException("用户登陆信息异常");
+        if (!(authentication.getDetails() instanceof UserDetails )){
+           return null;
         }
-        return (UserDetails)authentication;
+        return (UserDetails)authentication.getDetails();
     }
 }
