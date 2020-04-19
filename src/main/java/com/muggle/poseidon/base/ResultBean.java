@@ -1,6 +1,7 @@
 package com.muggle.poseidon.base;
 
 import com.muggle.poseidon.entity.AuthUrlPathDO;
+import reactor.core.publisher.Mono;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -84,7 +85,17 @@ public class ResultBean<T> implements Serializable {
         return new ResultBean<>("请求成功",200,data);
     }
 
+    public static<T>  Mono<ResultBean<T>> getInstance(Mono<T> result){
+        return result.map(data-> ResultBean.successData(data));
+    }
 
+    public static <T> Mono<ResultBean<T>> result(ResultBean<T> resultBean){
+        return Mono.just(resultBean);
+    }
+
+    public  Mono<ResultBean<T>> covert(){
+        return Mono.just(this);
+    }
     public ResultBean() {
 
     }
