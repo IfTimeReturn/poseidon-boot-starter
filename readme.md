@@ -215,7 +215,7 @@ POSEIDON---- 2020-04-06 12:15:06 [http-nio-8080-exec-3] INFO  com.muggle.poseido
 
 ### 统一异常处理相关配置
 
-`com.muggle.poseidon.handler.WebResultHandler.WebResultHandler` 是统一异常处理类，该类定义了部分异常捕获后返回给前端的json信息，用户根据实际情况按需调整。
+`com.muggle.poseidon.handler.web.WebResultHandler.WebResultHandler` 是统一异常处理类，该类定义了部分异常捕获后返回给前端的json信息，用户根据实际情况按需调整。
 
 这里需要注意一个 异常报警功能的使用：
 
@@ -294,7 +294,7 @@ public class ExceptionListener implements ApplicationListener<ExceptionEvent> {
 
 ```properties
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.muggle.poseidon.handler.WebResultHandler,\
+com.muggle.poseidon.handler.web.WebResultHandler,\
 com.username.lestener.ExceptionListener
 ```
 

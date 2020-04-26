@@ -1,4 +1,4 @@
-package com.muggle.poseidon.handler;
+package com.muggle.poseidon.handler.security;
 
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
