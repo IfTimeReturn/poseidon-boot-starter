@@ -19,4 +19,8 @@ public class CommonQueryBean<T>  {
     private int pageSize;
 
     private String groupBy;
+
+    public String getSql(){
+        return null;
+    }
 }
